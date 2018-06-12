@@ -1,0 +1,27 @@
+{
+  "name": "pakittie-registry",
+  "version": "1.0.0",
+  "description": "A registry for little Jon's baby shower",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benfroelich/pakittie-shower-registry.git"
+  },
+  "keywords": [
+    "shower",
+    "registry"
+  ],
+  "author": "benny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benfroelich/pakittie-shower-registry/issues"
+  },
+  "homepage": "https://github.com/benfroelich/pakittie-shower-registry#readme",
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "mongoose": "^5.1.5"
+  }
+}
