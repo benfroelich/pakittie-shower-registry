@@ -1,0 +1,12 @@
+<h1>Registry</h1>
+<% entries.forEach(function(entry) { %>
+    <div>
+        <h1><%= entry.item %></h1>
+        <img src="<%= entry.imgUrl %>"/>
+        <% if(entry.claimed) { %>
+            <p>claimed already</p>
+        <% } else { %>
+            <p><a href="#">claim!</a></p>
+        <% } %>
+    </div>
+<% }); %>
