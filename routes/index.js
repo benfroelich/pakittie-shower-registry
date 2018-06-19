@@ -21,7 +21,19 @@ router.get("/registry", function(request, response) {
 
 // edit: check it off and add name
 router.get("/registry/:id/edit", function(request, response) {
-    response.send("editing: " + request.params.id);
+    RegistryEntry.findById(request.params.id, function(err, entry) {
+        if(err) console.log(err);
+        console.log("rendering the edit page for: ");
+        console.log(entry);
+        response.render("registry/edit", {entry: entry});
+    });
+});
+
+router.put("/registry/:id", function(request, response) {
+    RegistryEntry.findByIdAndUpdate(request.params.id, request.params.entry, function(error) {
+        console.log(error);
+        response.redirect("/registry");
+    });
 });
 
 module.exports = router;

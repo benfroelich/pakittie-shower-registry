@@ -6,7 +6,7 @@
         <% if(entry.claimed) { %>
             <p>claimed already</p>
         <% } else { %>
-            <p><a href="#">claim!</a></p>
+            <p><a href="registry/<%= entry._id %>/edit">claim!</a></p>
         <% } %>
     </div>
 <% }); %>

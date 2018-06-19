@@ -1,0 +1,15 @@
+<h1><%= entry.item %></h1>
+<div>
+    <form action="/registry/<%=entry._id%>?_method=PUT" method="post">
+        <label>
+            check to claim, uncheck to unclaim
+            <input type="checkbox" name="entry[claimed]" value="<%= entry.claimed %>">
+        </label>
+        <label>
+            claimed by: (only visible to Xenia and Ben for thank-you letters)
+        </label>
+        <input type="text" name="entry[from]">
+        <input type="submit" value="update">
+    </form>
+    <img src="<%= entry.imgUrl %>"/>
+</div>
