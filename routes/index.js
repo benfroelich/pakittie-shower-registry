@@ -30,8 +30,10 @@ router.get("/registry/:id/edit", function(request, response) {
 });
 
 router.put("/registry/:id", function(request, response) {
-    RegistryEntry.findByIdAndUpdate(request.params.id, request.params.entry, function(error) {
-        console.log(error);
+    console.log("updating: ");
+    console.log(request.body.entry);
+    RegistryEntry.findByIdAndUpdate(request.params.id, request.body.entry, function(error) {
+        if(error) console.log(error);
         response.redirect("/registry");
     });
 });

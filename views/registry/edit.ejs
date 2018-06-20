@@ -3,7 +3,7 @@
     <form action="/registry/<%=entry._id%>?_method=PUT" method="post">
         <label>
             check to claim, uncheck to unclaim
-            <input type="checkbox" name="entry[claimed]" value="<%= entry.claimed %>">
+            <input type="checkbox" name="entry[claimed]" value="true">
         </label>
         <label>
             claimed by: (only visible to Xenia and Ben for thank-you letters)
