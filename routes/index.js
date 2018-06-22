@@ -29,24 +29,27 @@ router.get("/registry/:id/edit", function(request, response) {
 });
 
 router.put("/registry/:id", function(request, response) {
-    console.log("updating: ");
-    console.log(request.body.entry);
-    if(request.body.entry.claimed != true) request.body.entry.claimed = false;
+    // RegistryEntry model stores claimed status as a boolean, 
+    // but the checkbox returns a string
+    request.body.entry.claimed = request.body.entryClaimedString === "true";
     RegistryEntry.findByIdAndUpdate(request.params.id, request.body.entry, 
         function(error) {
         if(error) console.log(error);
+        // retrieve the updated document to send an email
         RegistryEntry.findById(request.params.id, function(error, entry) {
             if(error) console.log(error);
-            sendEmail(request.body.emailAddress, entry, 
-                // build the path to the edit route robustly
-                request.get("host") + request.baseUrl + request.path + "/edit");
+            // build the path to the edit route robustly for the email link
+            if(request.body.entry.claimed)
+                sendEmail(request.body.emailAddress, entry, 
+                    request.get("host") + request.baseUrl + request.path + "/edit");
             response.redirect("/registry");
         });
     });
 });
 
 function sendEmail(emailRecipient, entry, url) {
-    // send email to benny for testing
+    // TODO: create the email body in an ejs template?
+    // TODO: seperate contact info from source code
     var emailMessage = 
     "Hi " + entry.from + "!\n" + 
     "Thanks for registering for \'" + entry.item + "\'\n" + 
