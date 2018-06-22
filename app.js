@@ -23,6 +23,8 @@ app.set("view engine", "ejs");
 // tell the express framework that the css is in the public directory
 app.use(express.static(__dirname + "/public"));
 
+require(__dirname + "/email/email");
+
 app.use("/", indexRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function () {
