@@ -14,10 +14,7 @@ router.get("/", function(request, response) {
 router.get("/registry", function(request, response) {
     RegistryEntry.find({}, function(err, entries) {
         if(err) console.log(err);
-        console.log("passing to template: ");
-        console.log(entries);
-
-       response.render("registry/index", {entries: entries}); 
+        response.render("registry/index", {entries: entries}); 
    });
 });
 
