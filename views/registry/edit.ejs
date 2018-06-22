@@ -1,3 +1,4 @@
+<%include ./partials/header%>
 <h1><%= entry.item %></h1>
 <div>
     <form action="/registry/<%=entry._id%>?_method=PUT" method="post">
@@ -15,3 +16,5 @@
     </form>
     <img src="<%= entry.imgUrl %>"/>
 </div>
+<%include ./partials/footer%>
+
