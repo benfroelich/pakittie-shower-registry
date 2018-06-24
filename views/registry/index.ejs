@@ -1,18 +1,30 @@
 <%include ../partials/header%>
-<h1>Registry</h1>
+<div class="ui masthead vertical segment">
+    <div class="ui container">
+        <h1 class="ui header">Registry Items</h1>
+    </div>
+</div>
+<div class="ui hidden divider"></div>
+<div class="ui container">
     <div class="ui stackable four column grid">
         <% entries.forEach(function(entry) { %>
             <div class="column">
                 <div class="ui segment">
+                <% if(!entry.claimed) { %> 
+                    <a href="/registry/<%= entry._id %>/edit">
+                <% } %>
                     <h1><%= entry.item %></h1>
-                    <img class="ui fluid image" src="<%= entry.imgUrl %>"/>
+                    <img class="ui fluid image <% if(entry.claimed) { %> 
+                        disabled <% } %>" src="<%= entry.imgUrl %>"/>
                     <% if(entry.claimed) { %>
                         <p>claimed already</p>
                     <% } else { %>
                         <p><a href="registry/<%= entry._id %>/edit">claim!</a></p>
                     <% } %>
+            <% if(!entry.claimed) { %> </a> <% } %>
                 </div>
             </div>
         <% }); %>
     </div>
+</div>
 <%include ../partials/footer%>

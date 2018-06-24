@@ -2,18 +2,22 @@
 <h1><%= entry.item %></h1>
 <div>
     <form action="/registry/<%=entry._id%>?_method=PUT" method="post">
-        <div>
-            <label>Claim this item: </label>
-            <input type="checkbox" name="entryClaimedString" value="true">
-        </div>
-        <div>
-            <label>claimed by: (only visible to Xenia and Ben for thank-you letters)</label>
-            <input type="text" name="entry[from]">
-        </div>
-        <div>
-            <label>your email address (we'll send a confirmation for your records)</label>
-            <input type="text" name="emailAddress">
-        </div>
+        <% if(entry.claimed) { %> 
+            <p>                    
+                this item was claimed already, if you claimed it, you can 
+                unclaim it by clicking here:
+            </p>
+        <% } else { %>
+            <div>
+                <label>claimed by: (only visible to Xenia and Ben for thank-you 
+                    notes)</label>
+                <input type="text" name="entry[from]">
+            </div>
+            <div>
+                <label>your email address for the confirmation</label>
+                <input type="text" name="emailAddress">
+            </div>
+        <% } %>
         <div>
             <input type="submit" value="update">
         </div>

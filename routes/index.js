@@ -29,21 +29,19 @@ router.get("/registry/:id/edit", function(request, response) {
 });
 
 router.put("/registry/:id", function(request, response) {
-    // RegistryEntry model stores claimed status as a boolean, 
-    // but the checkbox returns a string
-    request.body.entry.claimed = request.body.entryClaimedString === "true";
-    RegistryEntry.findByIdAndUpdate(request.params.id, request.body.entry, 
-        function(error) {
+    // switching between claiming and "unclaiming" an entry is determined 
+    // in the edit template, and entry will only be defined for claiming
+    var claimingItem = request.body.entry ? true : false;
+    var entryToUpdate = request.body.entry ? request.body.entry : {};
+    entryToUpdate.claimed = claimingItem;
+    RegistryEntry.findByIdAndUpdate(request.params.id, entryToUpdate, function(error) {
         if(error) console.log(error);
-        // retrieve the updated document to send an email
-        RegistryEntry.findById(request.params.id, function(error, entry) {
-            if(error) console.log(error);
-            // build the path to the edit route robustly for the email link
-            if(request.body.entry.claimed)
-                sendEmail(request.body.emailAddress, entry, 
+        if(claimingItem)
+            RegistryEntry.findById(request.params.id, function(error, fullEntry) {
+                sendEmail(request.body.emailAddress, fullEntry, 
                     request.get("host") + request.baseUrl + request.path + "/edit");
-            response.redirect("/registry");
-        });
+            });
+        response.redirect("/registry");
     });
 });
 
@@ -55,6 +53,7 @@ function sendEmail(emailRecipient, entry, url) {
     "Thanks for registering for \'" + entry.item + "\'\n" + 
     "Change or view at " + url + "\n" +
     "Shipping address: 890 Coronado Circle Santa Paula CA 93060";
+    
     var mail = {
         from: "pakittie <littlepakittie@gmail.com>",
         to: emailRecipient,
