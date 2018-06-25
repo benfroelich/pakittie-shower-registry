@@ -1,33 +1,30 @@
 require("mongoose");
 var RegistryEntry = require("../models/registryEntry");
 var seeds = [
-        {
-            item: "crib",
-            imgUrl: "https://images.crateandbarrel.com/is/image/Crate/Crib_Anderson_Nat_V1",
-            link: "#",
-            from: ""
-            
-        }, 
-        {
-            item: "cloth diapers",
-            imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJum7xuVLi8wrCqPbVqZcWFQnX92HGwdG4hXZ0XypWY_99BhOeKA",
-            link: "#",
-            from: ""
-        },
-        {
-            item: "bottles",
-            imgUrl: "",
-            link: "#",
-            from: ""
-        },
-        {
-            item: "baby stuff",
-            imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJum7xuVLi8wrCqPbVqZcWFQnX92HGwdG4hXZ0XypWY_99BhOeKA",
-            link: "#",
-            from: "Obama",
-            claimed: true
-        }
-    ];
+    {item: "handmade goods, etc`", imgUrl: "", link: "#", from: ""}, 
+    {item: "wipes", imgUrl: "", link: "#", from: ""}, 
+    {item: "Infant car seat", imgUrl: "", link: "#", from: ""}, 
+    {item: "Convertible car seat", imgUrl: "", link: "#", from: ""}, 
+    {item: "Stroller", imgUrl: "", link: "#", from: ""}, 
+    {item: "Diaper Bag", imgUrl: "", link: "#", from: ""}, 
+    {item: "Bottles", imgUrl: "", link: "#", from: ""}, 
+    {item: "Bottle Brush", imgUrl: "", link: "#", from: ""}, 
+    {item: "Walker", imgUrl: "", link: "#", from: ""}, 
+    {item: "Booster Seat", imgUrl: "", link: "#", from: ""}, 
+    {item: "Baby Sling/Catapult", imgUrl: "", link: "#", from: ""}, 
+    {item: "SKIP*HOP Moby Softspot Baby Sink Bather", imgUrl: "", link: "#", from: ""}, 
+    {item: "Bambino Mio, Miosolo All-In-One Cloth Diaper, Onesize", imgUrl: "https://images-na.ssl-images-amazon.com/images/I/815LU886jVL._SX522_.jpg", link: "#", from: ""}, 
+    {item: "ALVABABY Pocket Cloth Diapers Reusable Washable Adjustable One Size for Baby Boys and Girls 6 Pack with 12 Inserts 6DM26", imgUrl: "", link: "#", from: ""}, 
+    {item: "Imagine Baby Products Newborn Stay Dry All-In-One Hook and Loop Cloth Diaper, Trumpet", imgUrl: "", link: "#", from: ""}, 
+    {item: "OsoCozy prefolds", imgUrl: "", link: "#", from: ""}, 
+    {item: "Snappi Cloth Diaper Fasteners", imgUrl: "", link: "#", from: ""}, 
+    {item: "Changing Pad Cover", imgUrl: "", link: "#", from: ""}, 
+    {item: "Swaddle Blankets/Blankets", imgUrl: "", link: "#", from: ""}, 
+    {item: "Baby wash and shampoo", imgUrl: "", link: "#",}, 
+    {item: "Diaper Rash Ointment",imgUrl: "",link: "#",},
+    {item: "Pacifier", imgUrl: "", link: "#"},
+    {item: "Nail clipper and nail filer", imgUrl: "", link: "#",}
+];
 function seedDb() {
     RegistryEntry.remove({}, function(err) {
         if(err) console.log(err);
