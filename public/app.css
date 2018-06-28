@@ -1,3 +1,8 @@
 img .registryImg {
     height: 100%;
 }
+
+body {
+    background-image: url("https://openclipart.org/download/211279/1420210938.svg") !important;
+    background-size: 50px 50px !important;
+}

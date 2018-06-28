@@ -1,7 +1,7 @@
 require("mongoose");
 var RegistryEntry = require("../models/registryEntry");
 var seeds = [
-    {item: "handmade goods, etc`", imgUrl: "", link: "#", from: ""}, 
+    {item: "handmade goods (don't need to claim)", imgUrl: "", link: "#", from: ""}, 
     {item: "wipes", imgUrl: "", link: "#", from: ""}, 
     {item: "Infant car seat", imgUrl: "", link: "#", from: ""}, 
     {item: "Convertible car seat", imgUrl: "", link: "#", from: ""}, 
