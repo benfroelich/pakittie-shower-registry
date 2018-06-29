@@ -3,6 +3,5 @@ img .registryImg {
 }
 
 body {
-    background-image: url("https://openclipart.org/download/211279/1420210938.svg") !important;
-    background-size: 50px 50px !important;
+    background-image: url("/img/baby-feet.svg") !important;
 }

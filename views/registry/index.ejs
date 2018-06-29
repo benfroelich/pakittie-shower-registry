@@ -7,14 +7,14 @@
 </div>
 <div class="ui hidden divider"></div>
 <div class="ui container">
-    <div class="ui stackable four column grid">
+    <div class="ui stackable three column grid">
         <% entries.forEach(function(entry) { %>
             <div class="column">
                 <div class="ui segment">
                 <% if(!entry.claimed) { %> 
                     <a href="/registry/<%= entry._id %>/edit">
                 <% } %>
-                    <h1><%= entry.item %></h1>
+                    <h3><%= entry.item %></h3>
                     <img class="ui fluid image <% if(entry.claimed) { %> 
                         disabled <% } %>" src="<%= entry.imgUrl %>"/>
                     <% if(entry.claimed) { %>

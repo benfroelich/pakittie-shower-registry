@@ -4,7 +4,7 @@ var express        = require("express"),
     methodOverride = require("method-override");
 
 require("ejs");
-//require(__dirname + "/utilities/seedDb")();
+require(__dirname + "/utilities/seedDb")();
 var app = express();
 var dbUrl = process.env.DATABASE_URL || "mongodb://localhost/pakittie-registry";
 mongoose.connect(dbUrl);
