@@ -3,7 +3,7 @@ var RegistryEntry = require("../models/registryEntry");
 var seeds = [
     {item: "handmade goods", imgUrl: "/img/diy.jpg", link: "#", from: ""}, 
     {item: "wipes", imgUrl: "", link: "#", from: ""}, 
-    {item: "Infant car seat", imgUrl: "", link: "#", from: ""}, 
+    {item: "Infant car seat", imgUrl: "/img/car-seat.jpg", link: "#", from: ""}, 
     {item: "Convertible car seat", imgUrl: "", link: "#", from: ""}, 
     {item: "Stroller", imgUrl: "", link: "#", from: ""}, 
     {item: "Diaper Bag", imgUrl: "", link: "#", from: ""}, 
