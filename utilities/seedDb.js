@@ -2,7 +2,7 @@ require("mongoose");
 var RegistryEntry = require("../models/registryEntry");
 var seeds = [
     // 36 + handmade
-    {item: "handmade goods", imgUrl: "/img/diy.jpg", link: "#", quantity: "unlimited"}, 
+    {item: "handmade goods", imgUrl: "/img/diy.jpg", link: "#", quantity: Number.POSITIVE_INFINITY}, 
     {item: "wipes", imgUrl: "", link: "#", quantity: 4}, 
     {item: "Infant car seat", imgUrl: "/img/car-seat.jpg", link: "#"}, 
     {item: "Convertible car seat", imgUrl: "", link: "#"}, 

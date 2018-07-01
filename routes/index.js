@@ -22,7 +22,7 @@ router.get("/registry", function(request, response) {
 router.get("/registry/:id/edit", function(request, response) {
     RegistryEntry.findById(request.params.id, function(err, entry) {
         if(err) console.log(err);
-        var available = entry.quantity < entry.claims.length;
+        var available = entry.claims.length < entry.quantity;
         console.log("rendering the edit page for: ");
         console.log(entry);
         response.render("registry/edit", {

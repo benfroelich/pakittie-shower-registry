@@ -1,16 +1,17 @@
 <%include ../partials/header%>
-<h3><%= entry.item %></h3>
-<div>
-    <form action="/registry/<%=entry._id%>?_method=PUT" method="post">
-        <% if(entry.claimed) { %> 
-            <p>                    
-                this item was claimed already, if you claimed it, you can 
-                unclaim it by clicking here:
-            </p>
-        <% } else { %>
-            <div>
-                <%= entry.claims.length %> out of <%= entry.quantity %> claimed
-            </div>
+<div class="ui container">
+    <h2><%= entry.item %></h2>
+    <div>
+        <%= entry.claims.length %> out of <%= entry.quantity %> claimed
+    </div>
+    <% if(!available) { %> 
+        <p>                    
+            this item was claimed already. To unclaim, follow the delete 
+            link sent via email.
+        </p>
+    <% } else { %>
+        <form class="ui segment" action="/registry/<%=entry._id%>?_method=PUT" 
+            method="post">
             <div>
                 <label>claimed by: (only visible to Xenia and Ben for thank-you 
                     notes)</label>
@@ -20,12 +21,12 @@
                 <label>your email address for the confirmation</label>
                 <input type="text" name="emailAddress" required>
             </div>
-        <% } %>
-        <div>
-            <input type="submit" value="update">
-        </div>
-    </form>
-    <img src="<%= entry.imgUrl %>"/>
+            <div>
+                <input class="ui button" type="submit" value="claim">
+            </div>
+        </form>
+    <% } %>
+    <img class="ui centered medium image" src="<%= entry.imgUrl %>"/>
 </div>
 <%include ../partials/footer%>
 

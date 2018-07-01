@@ -11,21 +11,21 @@
         <% entries.forEach(function(entry) { %>
             <div class="column">
                 <div class="ui segment">
-                <% if(!entry.claimed) { %> 
+                <% if(entry.claims.length < entry.quantity) { %> 
                     <a href="/registry/<%= entry._id %>/edit">
                 <% } %>
                     <h3><%= entry.item %></h3>
                     <img class="ui fluid image <% if(entry.claimed) { %> 
                         disabled <% } %>" src="<%= entry.imgUrl %>"/>
-                    <% if(entry.claimed) { %>
-                        <p>claimed already</p>
+                    <% if(entry.claims.length < entry.quantity) { %>
+                        <p class="ui button">claim!</p>
                     <% } else { %>
-                        <p><a href="registry/<%= entry._id %>/edit">claim!</a></p>
+                        <p>claimed already</p>
                     <% } %>
-            <% if(!entry.claimed) { %> </a> <% } %>
+            <% if(entry.claims.length < entry.quantity) { %> </a> <% } %>
                 </div>
             </div>
-        <% }); %>
+        <% }); %>   
     </div>
 </div>
 <%include ../partials/footer%>
