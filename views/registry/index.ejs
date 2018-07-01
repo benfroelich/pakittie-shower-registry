@@ -10,20 +10,22 @@
     <div class="ui stackable three column grid">
         <% entries.forEach(function(entry) { %>
             <div class="column">
-                <div class="ui segment">
                 <% if(entry.claims.length < entry.quantity) { %> 
                     <a href="/registry/<%= entry._id %>/edit">
-                <% } %>
-                    <h3><%= entry.item %></h3>
-                    <img class="ui fluid image <% if(entry.claimed) { %> 
-                        disabled <% } %>" src="<%= entry.imgUrl %>"/>
-                    <% if(entry.claims.length < entry.quantity) { %>
-                        <p class="ui button">claim!</p>
-                    <% } else { %>
+                        <div class="ui segment">
+                            <h3><%= entry.item %></h3>
+                            <img class="ui fluid image" src="<%= entry.imgUrl %>"/>
+                            <p class="ui button">register for this item</p>
+                        </div>
+                    </a>   
+                <% } else { %>
+                    <div class="ui segment">
+                        <h3><%= entry.item %></h3>
+                        <img class="ui fluid image disabled" 
+                            src="<%= entry.imgUrl %>"/>
                         <p>claimed already</p>
-                    <% } %>
-            <% if(entry.claims.length < entry.quantity) { %> </a> <% } %>
-                </div>
+                    </div>
+                <% } %>
             </div>
         <% }); %>   
     </div>
