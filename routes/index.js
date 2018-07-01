@@ -18,31 +18,32 @@ router.get("/registry", function(request, response) {
    });
 });
 
-// edit: check it off and add name
+// show + submit to claim
 router.get("/registry/:id/edit", function(request, response) {
     RegistryEntry.findById(request.params.id, function(err, entry) {
         if(err) console.log(err);
+        var available = entry.quantity < entry.claims.length;
         console.log("rendering the edit page for: ");
         console.log(entry);
-        response.render("registry/edit", {entry: entry});
+        response.render("registry/edit", {
+            entry: entry, 
+            available: available
+        });
     });
 });
 
 router.put("/registry/:id", function(request, response) {
-    // switching between claiming and "unclaiming" an entry is determined 
-    // in the edit template, and entry will only be defined for claiming
-    var claimingItem = request.body.entry ? true : false;
-    var entryToUpdate = request.body.entry ? request.body.entry : {};
-    entryToUpdate.claimed = claimingItem;
-    RegistryEntry.findByIdAndUpdate(request.params.id, entryToUpdate, function(error) {
+    RegistryEntry.findById(request.params.id, function(error, entry) {
         if(error) console.log(error);
-        if(claimingItem)
-            RegistryEntry.findById(request.params.id, function(error, fullEntry) {
-                sendEmail(request.body.emailAddress, fullEntry, 
-                    request.get("host") + request.baseUrl + request.path + "/edit");
-            });
-        response.redirect("/registry");
+        entry.claims.push({from: request.body.entry.from});
+        entry.save(function(error, entry) {
+            if(error) console.log(error);
+            else
+                sendEmail(request.body.emailAddress, entry, request.get("host") 
+                    + request.baseUrl + request.path + "/edit");
+        });
     });
+    response.redirect("/registry");
 });
 
 function sendEmail(emailRecipient, entry, url) {

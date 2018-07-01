@@ -1,5 +1,5 @@
 <%include ../partials/header%>
-<h1><%= entry.item %></h1>
+<h3><%= entry.item %></h3>
 <div>
     <form action="/registry/<%=entry._id%>?_method=PUT" method="post">
         <% if(entry.claimed) { %> 
@@ -8,6 +8,9 @@
                 unclaim it by clicking here:
             </p>
         <% } else { %>
+            <div>
+                <%= entry.claims.length %> out of <%= entry.quantity %> claimed
+            </div>
             <div>
                 <label>claimed by: (only visible to Xenia and Ben for thank-you 
                     notes)</label>
