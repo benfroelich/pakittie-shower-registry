@@ -39,21 +39,40 @@ router.put("/registry/:id", function(request, response) {
         entry.save(function(error, entry) {
             if(error) console.log(error);
             else
-                sendEmail(request.body.emailAddress, entry, request.get("host") 
-                    + request.baseUrl + request.path + "/edit");
+            {
+                var newEntryId = entry.claims[entry.claims.length - 1]._id,
+                    urlPrefix = request.get("host") + request.baseUrl + request.path,
+                    showUrl = urlPrefix + "/edit",
+                    deleteUrl = urlPrefix + "/" + newEntryId;
+                sendEmail(request.body.emailAddress, entry,  showUrl, deleteUrl);
+            }
         });
     });
     response.redirect("/registry");
 });
 
-function sendEmail(emailRecipient, entry, url) {
+router.get("/registry/:itemId/:claimId", function (request, response) {
+    RegistryEntry.findById(request.params.itemId, function(error, entry) {
+        if(error) console.log(error);
+        else
+        {
+            entry.claims = entry.claims.filter(function(claim) {
+                return claim._id != request.params.claimId;
+            });
+            entry.save();
+        }
+    });
+    response.redirect("/")
+});
+
+function sendEmail(emailRecipient, entry, showUrl, deleteUrl) {
     // TODO: create the email body in an ejs template?
     // TODO: seperate contact info from source code
     var emailMessage = 
-    "Hi " + entry.from + "!\n" + 
-    "Thanks for registering for \'" + entry.item + "\'\n" + 
-    "Change or view at " + url + "\n" +
-    "Shipping address: 890 Coronado Circle Santa Paula CA 93060";
+    "Hi " + entry.claims[entry.claims.length - 1].from + 
+    ", thanks for registering for " + entry.item + 
+    ". View at " + showUrl + ", and un-register at " + deleteUrl;
+    ". Shipping address: " + process.env.REGISTRY_SHIPPING_ADDRESS;
     
     var mail = {
         from: "pakittie <littlepakittie@gmail.com>",
