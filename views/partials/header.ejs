@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Little Pakittie's Registry</title>
+        <title>Little Jon's Registry</title>
         <link rel="stylesheet" type="text/css" href="/app.css">
         <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
         <script
@@ -11,10 +11,12 @@
         <script src="/semantic/dist/semantic.min.js"></script> 
     </head>
     <body>
-        <a class="ui segment" href="/">Home</a>
-        <a class="ui segment" href="/registry">Registry</a>
+        <div class="ui stackable menu">
+            <a class="item" href="/">Home</a>
+            <a class="item" href="/registry">Registry</a>
+        </div>
         <% flash.forEach(function(msg) { %>
-            <div class="ui message">
+            <div class="ui positive message">
                 <%= msg %> 
             </div>
         <% }); %>
