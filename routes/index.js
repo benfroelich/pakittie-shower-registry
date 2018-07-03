@@ -80,7 +80,7 @@ function sendEmail(emailRecipient, entry, showUrl, deleteUrl) {
     var emailMessage = 
     "Hi " + entry.claims[entry.claims.length - 1].from + 
     ", thanks for registering for " + entry.item + 
-    ". View at " + showUrl + ", and un-register at " + deleteUrl;
+    ". View at " + showUrl + ", and un-register at " + deleteUrl + 
     ". Shipping address: " + process.env.REGISTRY_SHIPPING_ADDRESS;
     
     var mail = {
