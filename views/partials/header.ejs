@@ -11,3 +11,11 @@
         <script src="/semantic/dist/semantic.min.js"></script> 
     </head>
     <body>
+        <a class="ui segment" href="/">Home</a>
+        <a class="ui segment" href="/registry">Registry</a>
+        <% flash.forEach(function(msg) { %>
+            <div class="ui message">
+                <%= msg %> 
+            </div>
+        <% }); %>
+    

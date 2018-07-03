@@ -19,22 +19,4 @@ emailTransport.verify(function(error, success) {
    }
 });
 
-// var mail = {
-//     from: "pakittie <littlepakittie@gmail.com>",
-//     to: "benfroelich@gmail.com",
-//     subject: "hi mama and papa!",
-//     text: "hi mama this is little kittie!",
-//     html: "<em>hi mama this is little kittie!</em>"
-// }
-
-// emailTransport.sendMail(mail, function(error, response){
-//     if(error){
-//         console.log(error);
-//     }else{
-//         console.log("Message sent: " + response.message);
-//     }
-
-//     emailTransport.close();
-// });
-
 module.exports = emailTransport;

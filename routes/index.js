@@ -3,6 +3,12 @@ var router = express.Router();
 var RegistryEntry = require("../models/registryEntry");
 var emailTransport = require("../email/email");
 
+// include flash messages in template header
+router.use(function(request, response, next) {
+   response.locals.flash = request.flash('info');
+   next();
+});
+
 //////////// index routes
 // landing page
 router.get("/", function(request, response) {
@@ -38,8 +44,7 @@ router.put("/registry/:id", function(request, response) {
         entry.claims.push({from: request.body.entry.from});
         entry.save(function(error, entry) {
             if(error) console.log(error);
-            else
-            {
+            else {
                 var newEntryId = entry.claims[entry.claims.length - 1]._id,
                     urlPrefix = request.get("host") + request.baseUrl + request.path,
                     showUrl = urlPrefix + "/edit",
@@ -48,26 +53,30 @@ router.put("/registry/:id", function(request, response) {
             }
         });
     });
+    request.flash("info", "Thank you for registering! Confirmation email sent.");
     response.redirect("/registry");
 });
 
 router.get("/registry/:itemId/:claimId", function (request, response) {
     RegistryEntry.findById(request.params.itemId, function(error, entry) {
         if(error) console.log(error);
-        else
-        {
+        else {
             entry.claims = entry.claims.filter(function(claim) {
                 return claim._id != request.params.claimId;
             });
-            entry.save();
+            entry.save(function(error) {
+                if(error) console.log(error);
+                console.log("set up flash message");
+                request.flash("info", "Successfully removed your registration" + 
+                    " for this item");
+                response.redirect("/registry/" + request.params.itemId + "/edit");
+            });
         }
     });
-    response.redirect("/")
 });
 
 function sendEmail(emailRecipient, entry, showUrl, deleteUrl) {
     // TODO: create the email body in an ejs template?
-    // TODO: seperate contact info from source code
     var emailMessage = 
     "Hi " + entry.claims[entry.claims.length - 1].from + 
     ", thanks for registering for " + entry.item + 
@@ -75,7 +84,7 @@ function sendEmail(emailRecipient, entry, showUrl, deleteUrl) {
     ". Shipping address: " + process.env.REGISTRY_SHIPPING_ADDRESS;
     
     var mail = {
-        from: "pakittie <littlepakittie@gmail.com>",
+        from: "pakittie <" + process.env.EMAIL_USERNAME + "@gmail.com>",
         to: emailRecipient,
         subject: "Thanks for getting \'" + entry.item + "\'",
         text: emailMessage,

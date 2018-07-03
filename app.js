@@ -14,6 +14,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 // use to adhere to rest routes using forms
 app.use(methodOverride("_method"));
 
+app.use(require("cookie-parser")('a bcd cat'));
+app.use(require("express-session")({ cookie: { maxAge: 60000 }}));
+app.use(flash());
+
 var indexRoutes = require(__dirname + "/routes/index");
 
 var RegistryEntry = require(__dirname + "/models/registryEntry"); 
@@ -22,7 +26,6 @@ var RegistryEntry = require(__dirname + "/models/registryEntry");
 app.set("view engine", "ejs");
 // tell the express framework that the css is in the public directory
 app.use(express.static(__dirname + "/public"));
-
 require(__dirname + "/email/email");
 
 app.use("/", indexRoutes);
