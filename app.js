@@ -4,10 +4,13 @@ var express        = require("express"),
     methodOverride = require("method-override");
 
 require("ejs");
-require(__dirname + "/utilities/seedDb")();
 var app = express();
 var dbUrl = process.env.MONGODB_URI || "mongodb://localhost/pakittie-registry";
-mongoose.connect(dbUrl);
+console.log("attempting to connect to database at \'" + dbUrl + "\'");
+mongoose.connect(dbUrl, function(error) {
+    if(error) console.log(error);
+    require(__dirname + "/utilities/seedDb")();
+});
 var flash = require("connect-flash");
 
 app.use(bodyParser.urlencoded({extended: true}));

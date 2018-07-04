@@ -26,14 +26,14 @@ var seeds = [
     {item: "Nail clipper and nail filer", imgUrl: "/img/nail-clipper.jpeg", link: "#"},
     {item: "Automatic Bouncer/Auto rock and play sleeper", imgUrl: "/img/rocker.jpeg", link: "#"},
     {item: "Wash cloths", imgUrl: "/img/towels.png", link: "#"},
-*/    
+*/
     {item: "Newborn clothes", imgUrl: "/img/newborn-clothes.jpg", link: "#", quantity: 2},
     {item: "3-6 month clothes", imgUrl: "/img/three-to-six-month-clothes.jpg", link: "#", quantity: 2},
     {item: ">6 month clothes", imgUrl: "/img/six-plus-month-clothes.jpg", link: "#", quantity: 2},
     {item: "Crib sheets", imgUrl: "/img/crib-sheet.jpg", link: "#"},
     {item: "Nursing cover", imgUrl: "/img/nursing-cover.jpg", link: "#"},
     {item: "Diaper Genie", imgUrl: "/img/diaper-genie.jpg", link: "#"},
-    {item: "Baby healthcare kit", imgUrl: "/img/", link: "#"}
+    {item: "Baby healthcare kit", imgUrl: "/img/baby-healthcare-kit.jpg", link: "#"}
 ];
 function seedDb() {
     RegistryEntry.remove({}, function(err) {
@@ -46,6 +46,15 @@ function seedDb() {
                });
             });
         }
+    });
+}
+
+function updateInDb() {
+    console.log("updating items in database");
+    seeds.forEach(function(seed) {
+        RegistryEntry.findOneAndUpdate({item: seed.item}, seed, function(error) {
+            if(error) console.log(error);
+        });
     });
 }
 
