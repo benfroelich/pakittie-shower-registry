@@ -9,7 +9,7 @@ var dbUrl = process.env.MONGODB_URI || "mongodb://localhost/pakittie-registry";
 console.log("attempting to connect to database at \'" + dbUrl + "\'");
 mongoose.connect(dbUrl, function(error) {
     if(error) console.log(error);
-    require(__dirname + "/utilities/seedDb")();
+    //require(__dirname + "/utilities/seedDb")();
 });
 var flash = require("connect-flash");
 
