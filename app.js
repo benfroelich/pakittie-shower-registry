@@ -15,7 +15,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 
 app.use(require("cookie-parser")('a bcd cat'));
-app.use(require("express-session")({ cookie: { maxAge: 60000 }}));
+app.use(require("express-session")({
+    secret: "i-love-pakittie",
+    resave: false,
+    saveUninitialized: false
+}));
 app.use(flash());
 
 var indexRoutes = require(__dirname + "/routes/index");
