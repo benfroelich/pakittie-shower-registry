@@ -6,7 +6,7 @@ var express        = require("express"),
 require("ejs");
 require(__dirname + "/utilities/seedDb")();
 var app = express();
-var dbUrl = process.env.DATABASE_URL || "mongodb://localhost/pakittie-registry";
+var dbUrl = process.env.DATABASE_URI || "mongodb://localhost/pakittie-registry";
 mongoose.connect(dbUrl);
 var flash = require("connect-flash");
 
