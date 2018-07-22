@@ -1,10 +1,18 @@
 <%include ../partials/header%>
 <div class="ui container">
     <h2><%= entry.item %></h2>
-    <div>
-        <%= entry.claims.length %> people have claimed this entry. Up to 
-        <%= entry.quantity %> people can register for this entry.
-    </div>
+    <% if(entry.quantity > 1) { %> 
+        <div>
+            <%= entry.claims.length %> 
+            <% if(entry.claims.length == 1) { %> 
+                person has
+            <% } else { %> 
+                people have
+            <% } %> 
+             registered for this entry. Up to 
+            <%= entry.quantity %> people can register.
+        </div>
+    <% } %> 
     <% if(!available) { %> 
         <p>                    
             this entry was claimed already. To unclaim, follow the delete 
