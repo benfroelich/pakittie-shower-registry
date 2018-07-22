@@ -2,11 +2,12 @@
 <div class="ui container">
     <h2><%= entry.item %></h2>
     <div>
-        <%= entry.claims.length %> out of <%= entry.quantity %> claimed
+        <%= entry.claims.length %> people have claimed this entry. Up to 
+        <%= entry.quantity %> people can register for this entry.
     </div>
     <% if(!available) { %> 
         <p>                    
-            this item was claimed already. To unclaim, follow the delete 
+            this entry was claimed already. To unclaim, follow the delete 
             link sent via email.
         </p>
     <% } else { %>
