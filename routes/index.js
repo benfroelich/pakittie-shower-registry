@@ -41,20 +41,28 @@ router.get("/registry/:id/edit", function(request, response) {
 router.put("/registry/:id", function(request, response) {
     RegistryEntry.findById(request.params.id, function(error, entry) {
         if(error) console.log(error);
-        entry.claims.push({from: request.body.entry.from});
-        entry.save(function(error, entry) {
-            if(error) console.log(error);
-            else {
-                var newEntryId = entry.claims[entry.claims.length - 1]._id,
-                    urlPrefix = request.get("host") + request.baseUrl + request.path,
-                    showUrl = urlPrefix + "/edit",
-                    deleteUrl = urlPrefix + "/" + newEntryId;
-                sendEmail(request.body.emailAddress, entry,  showUrl, deleteUrl);
-            }
-        });
+        if(entry.claims.length >= entry.quantity) {
+            request.flash("info", "Sorry, item is no longer available");
+            response.redirect("/registry/" + request.params.id + "/edit");
+        } else {
+            entry.claims.push({from: request.body.entry.from});
+            entry.save(function(error, entry) {
+                if(error) {
+                    console.log(error);
+                    request.flash("info", "Registration failed, please contact Ben");
+                }
+                else {
+                    var newEntryId = entry.claims[entry.claims.length - 1]._id,
+                        urlPrefix = request.get("host") + request.baseUrl + request.path,
+                        showUrl = urlPrefix + "/edit",
+                        deleteUrl = urlPrefix + "/" + newEntryId;
+                    sendEmail(request.body.emailAddress, entry,  showUrl, deleteUrl);
+                    request.flash("info", "Thank you for registering! Confirmation email sent.");
+                }
+                response.redirect("/registry");
+            });
+        }
     });
-    request.flash("info", "Thank you for registering! Confirmation email sent.");
-    response.redirect("/registry");
 });
 
 router.get("/registry/:itemId/:claimId", function (request, response) {
