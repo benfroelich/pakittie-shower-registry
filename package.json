@@ -1,7 +1,7 @@
 {
-  "name": "pakittie-registry",
+  "name": "Sol2-registry",
   "version": "1.0.0",
-  "description": "A registry for little Jon's baby shower",
+  "description": "A registry for Sol II's baby shower",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
