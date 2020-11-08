@@ -10,7 +10,10 @@ console.log("attempting to connect to database at \'" + dbUrl + "\'");
 
 mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true}, function(error) {
     if(error) console.log(error);
-    //require(__dirname + "/utilities/seedDb")();
+    if(process.env.SEED_DB == "UPDATE" || process.env.SEED_DB == "REDO")
+    {
+        require(__dirname + "/utilities/seedDb")();
+    }
 });
 
 var flash = require("connect-flash");
