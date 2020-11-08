@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-
+// TODO add oath
 var emailTransport = nodemailer.createTransport( 
     {
         service: 'Gmail',
