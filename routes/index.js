@@ -53,7 +53,7 @@ router.put("/registry/:id", function(request, response) {
                 }
                 else {
                     var newEntryId = entry.claims[entry.claims.length - 1]._id,
-                        urlPrefix = request.get("host") + request.baseUrl + request.path,
+                        urlPrefix = "https://" + request.get("host") + request.baseUrl + request.path,
                         showUrl = urlPrefix + "/edit",
                         deleteUrl = urlPrefix + "/" + newEntryId;
                     sendEmail(request.body.emailAddress, entry,  showUrl, deleteUrl);
