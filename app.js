@@ -7,10 +7,12 @@ require("ejs");
 var app = express();
 var dbUrl = process.env.MONGODB_URI || "mongodb://localhost/pakittie-registry";
 console.log("attempting to connect to database at \'" + dbUrl + "\'");
-mongoose.connect(dbUrl, function(error) {
+
+mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true}, function(error) {
     if(error) console.log(error);
     //require(__dirname + "/utilities/seedDb")();
 });
+
 var flash = require("connect-flash");
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -38,6 +40,6 @@ require(__dirname + "/email/email");
 app.use("/", indexRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function () {
-    console.log("server is up n' runnin' for lil' Jon's registry");
+    console.log("server is running on " + process.env.IP + ":" + process.env.PORT);
 });
 
